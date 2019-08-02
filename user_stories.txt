@@ -1,0 +1,46 @@
+as a user, I want to create a new task
+    - recurrence = none, daily/daypartly, etc.
+    - 
+
+as a user, I want to see my tasks
+    - not completed, with completed tasks below
+    - all relevant columns/fields/etc.
+    - orderable?
+    - filterable via text box
+
+as a user, I want to clear my completed tasks
+    - save them to some archive area
+
+as a user, I want a quick way to set a task complete
+
+as a user, I want some way to set the state of a task to in progress
+
+
+
+Data model
+    Recurrence
+        Every Day (default: appears at midnight, late at 23:59)
+            - post MVP: configurable start / late times with nice defaults
+        Every Daypart (appears at start of daypart, late at end of daypart)
+        Every Week on X day of week
+        Every Months on x day of month
+        None
+
+    Dayparts
+        ?MVP
+            - system-built scheme of am/pm that all users have access to
+            - Day broken up into hours, hours assignable to daypart. CONTIGUOUS!
+            - placeholder for other dayparts, make functions generic
+            ? placeholder for user-defined specific ones?
+                
+Functions
+    Way to get next X days of tasks based on its recurrence
+    Way to get all currently due tasks
+
+QUESTIONS:
+    1. Should this be dynamically generated each time, or should there be a store, with stuff added?
+        almost certainly the former. trickier logic maybe but way less brittle. Try to avoid state!!
+
+
+
+    
