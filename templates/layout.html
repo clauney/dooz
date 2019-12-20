@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+    {% include 'tophead.html' %}
+
+    {% include 'header.html' %}
+
+{% with errors = get_flashed_messages(category_filter=["error"]) %}
+    {% if errors %}
+        {% for err in errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ err }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% with goodstuff = get_flashed_messages(category_filter=["success"]) %}
+    {% if goodstuff %}
+        {% for woot in goodstuff %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ woot }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["message"]) %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% with warnings = get_flashed_messages(category_filter=["warning"]) %}
+    {% if warnings %}
+        {% for warn in warnings %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ warn }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% if alertmsgs %}
+    {% for m in alertmsgs %}
+        <div class="alert alert-{{m.get('status')}}" role="alert">
+                {{m.get('status')|capitalize}}:&nbsp;{{m.get('message')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<body>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+
+</html>
