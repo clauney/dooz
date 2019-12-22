@@ -2,6 +2,7 @@
 
 static/css/* linguist-vendored
 static/js/* linguist-vendored
+templates/* linguist-language=html+jinja
 
 # Source files
 # ============
@@ -15,12 +16,12 @@ static/js/* linguist-vendored
 # Binary files
 # ============
 *.db     binary
-*.p      binary
-*.pkl    binary
-*.pickle binary
-*.pyc    binary
-*.pyd    binary
-*.pyo    binary
+*.p      binary linguist-generated=true
+*.pkl    binary linguist-generated=true
+*.pickle binary linguist-generated=true
+*.pyc    binary linguist-generated=true
+*.pyd    binary linguist-generated=true
+*.pyo    binary linguist-generated=true
 
 # Jupyter notebook
 *.ipynb  text
