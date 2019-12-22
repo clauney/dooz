@@ -2,7 +2,7 @@
 
 static/css/* linguist-vendored
 static/js/* linguist-vendored
-templates/* linguist-language=html+jinja
+templates/* linguist-language='HTML+Jinja'
 
 # Source files
 # ============
