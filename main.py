@@ -1,6 +1,6 @@
 '''
 TODO
-1. how does requirements.txt function across submodules?
+1. how does requirements.txt function across *subtrees*? (pretty sure: answer = manual)
 
 '''
 
@@ -51,8 +51,11 @@ localconfig = {
 
 cliconfig = {'name': 'cli_params', 'type': 'cli_params', 'sysargv': sys.argv}
 
-cfg = configerator.Configerator(config_sources=[localconfig, cliconfig])
-
+cfg = configerator.Configerator(config_sources=[localconfig, cliconfig],
+#                                store_cfgtypes_in_envvar=[str],
+                                )
+rc = cfg.running_config
+print('run webapp?', rc.get('runwebapp'))
 
 #meteo='''<iframe src="https://www.meteoblue.com/en/weather/widget/three/seattle_united-states-of-america_5809844?geoloc=fixed&nocurrent=0&nocurrent=1&noforecast=0&days=4&tempunit=FAHRENHEIT&windunit=MILE_PER_HOUR&layout=image"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px;height: 506px"></iframe><div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/forecast/week/whitewater_united-states-of-america_4281710?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget" target="_blank">meteoblue</a></div>'''
 
@@ -98,8 +101,7 @@ def todo(who):
 #                           hello_str=get_todo_msg(who.title())
 #                           )
 
-
-
-if __name__ == '__main__':
-  app.run(debug=True)
+if rc.get('runwebapp', '').upper() == 'TRUE':
+    if __name__ == '__main__':
+        app.run(debug=True)
 

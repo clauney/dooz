@@ -223,16 +223,16 @@ class Configerator():
                         a list of column names to use as the config hierarchy.
 
         '''
-        sources = kwargs.get('config_sources', [])
+        sources = kwargs.pop('config_sources', [])
         self.cfg_source_list = []
         self.cfg_source_dict = {}
         self.running_config = {}
-        
+        print('KWARGS:', kwargs)
         for d in sources:
             if d and type(d) == dict and d.get('type') in self.supported_sources:
                 if not d.get('name'):
                     d['name'] = '{}|{}'.format(d.get('type'), uuid.uuid4())
-                srcobj = self.supported_sources[d['type']](**d)
+                srcobj = self.supported_sources[d['type']](**d, **kwargs)
                 self.cfg_source_list.append(srcobj)
                 self.cfg_source_dict[d['name']] = srcobj
                 self.running_config.update(srcobj.config_data)
@@ -275,11 +275,14 @@ localconfig = {
                 },
         }
 
-import sys
-cliconfig = {'name': 'cli_params', 'type': 'cli_params', 'sysargv': sys.argv}
-
-#%%
-
-lcfg = LocalConfigSource(**localconfig)
-scfg = CLIParamsConfigSource(**cliconfig)
-cfg = Configerator(config_sources=[localconfig, cliconfig])
+# =============================================================================
+# import sys
+# cliconfig = {'name': 'cli_params', 'type': 'cli_params', 'sysargv': sys.argv}
+# 
+# #%%
+# 
+# lcfg = LocalConfigSource(**localconfig)
+# scfg = CLIParamsConfigSource(**cliconfig)
+# cfg = Configerator(config_sources=[localconfig, cliconfig])
+# 
+# =============================================================================
